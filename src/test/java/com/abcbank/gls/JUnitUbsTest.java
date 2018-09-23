@@ -64,6 +64,7 @@ public class JUnitUbsTest {
 	}
 	@Test
 	public void testUtilBuklProcess() throws Exception {
+		//Bulk Transaction wise Calculation
 		TransactionUtil util = new TransactionUtil();
 		util.loadCurrentStock(EConfig.GLS_CONFIG.getValue("gls.resource.input_folderName")
 				+ EConfig.GLS_CONFIG.getValue("gls.resource.input_startOf_day"));
@@ -76,6 +77,7 @@ public class JUnitUbsTest {
 		// delete the existing op file to generate a new one
 		Files.deleteIfExists(Paths.get(EConfig.GLS_CONFIG.getValue("gls.resource.input_folderName")
 						+ EConfig.GLS_CONFIG.getValue("gls.resource.output_endOf_day")));
+		//Each Transaction wise Calculation
 		util.generateCurrentStockCsv();
 		List<String> expStockFromCSV = getDataFromCSV(EConfig.GLS_CONFIG.getValue("gls.resource.input_folderName")
 				+ EConfig.GLS_CONFIG.getValue("gls.resource.expected_endOf_day"));
@@ -94,6 +96,7 @@ public class JUnitUbsTest {
 								+ EConfig.GLS_CONFIG.getValue("gls.resource.output_endOf_day")));
 		List<String> expStockFromCSV = getDataFromCSV(EConfig.GLS_CONFIG.getValue("gls.resource.input_folderName")
 				+ EConfig.GLS_CONFIG.getValue("gls.resource.expected_endOf_day"));
+		//Bulk Transaction wise Calculation
 		gls.bulkProcessStock();
 		
 		List<String> opStockFromCSV = getDataFromCSV(EConfig.GLS_CONFIG.getValue("gls.resource.output_folderName")
@@ -107,6 +110,7 @@ public class JUnitUbsTest {
 		// delete the existing op file to generate a new one
 		Files.deleteIfExists(Paths.get(EConfig.GLS_CONFIG.getValue("gls.resource.input_folderName")
 										+ EConfig.GLS_CONFIG.getValue("gls.resource.output_endOf_day")));
+		//Each Transaction wise Calculation
 		gls.sequenceProcessStock();
 		opStockFromCSV = getDataFromCSV(EConfig.GLS_CONFIG.getValue("gls.resource.output_folderName")
 						+ EConfig.GLS_CONFIG.getValue("gls.resource.output_endOf_day"));
